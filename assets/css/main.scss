@@ -1,38 +1,117 @@
----
-# Only the main Sass file needs front matter (the dashes are enough)
----
+/* ===========================================
+   Global Typography and Theme Settings
+   =========================================== */
 
-// Default theme colors
-$theme-colors: (
-  "coolblack": #090a0b,
-  "spacegrey": #353535,
-  "snowwhite": #ffffff,
-);
-
-// Default brand colors
-$brand-colors: (
-  "orangered": #ff5100,
-  "greatgold": #f2cb05,
-  "greenblue": #389092,
-);
-
-$theme-name: "{{ site.theme_color }}";
-$brand-name: "{{ site.brand_color }}";
-$theme-color: map-get($theme-colors, "snowwhite");
-$brand-color: map-get($brand-colors, "orangered");
-
-@if map-has-key($theme-colors, $theme-name) {
-  $theme-color: map-get($theme-colors, $theme-name);
-} @else if str-index($theme-name, "#") == 1 {
-  $theme-color: {{ site.theme_color | default: '#ffffff' }};
+/* Font and spacing applied site-wide */
+html, body {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  line-height: 2; /* Double spacing */
+  color: #000000;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
 }
 
-@if map-has-key($brand-colors, $brand-name) {
-  $brand-color: map-get($brand-colors, $brand-name);
-} @else if str-index($brand-name, "#") == 1 {
-  $brand-color: {{ site.brand_color | default: '#ff5100' }};
+/* Additional spacing for readability */
+p, li {
+  margin-bottom: 1em;
 }
 
-$content-width: {{ site.content_width | default: '920px' }};
+/* ===========================================
+   Theme Color Variables
+   =========================================== */
+:root {
+  /* Default theme colors */
+  --coolblack: #090a0b;
+  --spacegrey: #353535;
+  --snowwhite: #ffffff;
 
-@import "yat";
+  /* Default brand colors */
+  --orangered: #ff5100;
+  --greatgold: #f2cb05;
+  --greenblue: #389092;
+
+  /* Active theme and brand color (defaults) */
+  --theme-color: var(--snowwhite);
+  --brand-color: var(--orangered);
+
+  /* Content width */
+  --content-width: 920px;
+}
+
+/* ===========================================
+   Base Elements
+   =========================================== */
+
+/* Links */
+a {
+  color: var(--brand-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: Arial, sans-serif;
+  line-height: 2;
+  color: var(--coolblack);
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+/* Lists */
+ul, ol {
+  padding-left: 20px;
+}
+
+/* Buttons */
+button, .btn {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  line-height: 2;
+  color: #ffffff;
+  background-color: var(--brand-color);
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+button:hover, .btn:hover {
+  background-color: var(--greatgold);
+  color: #000000;
+}
+
+/* Content container */
+.container {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ===========================================
+   Optional - Theme Utility Classes
+   =========================================== */
+.bg-theme {
+  background-color: var(--theme-color);
+}
+
+.bg-brand {
+  background-color: var(--brand-color);
+}
+
+.text-theme {
+  color: var(--theme-color);
+}
+
+.text-brand {
+  color: var(--brand-color);
+}
+
+/* ===========================================
+   End of File
+   =========================================== */
